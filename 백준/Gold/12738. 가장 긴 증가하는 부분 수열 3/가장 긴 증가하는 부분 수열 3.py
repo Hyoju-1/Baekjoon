@@ -18,4 +18,36 @@ for x in A:
         # 그렇지 않으면 해당 위치의 원소를 x로 교체
         lis[pos] = x
 
+
 print(len(lis))  # 가장 긴 증가하는 부분 수열의 길이 출력
+
+
+######################################################################################
+# bisect모듈을 사용하지 않고 이진탐색함수를 구현해서 길이를 구하는 방법
+
+import sys
+input = sys.stdin.readline
+
+N = int(input().strip())
+A = list(map(int, input().split()))
+
+lis = []
+
+for x in A :
+    # 이진탐색
+    low, high = 0, len(lis)
+    while low < high:
+        mid = (low + high) // 2
+        if lis[mid] < x :
+            low = mid + 1
+        else:
+            high = mid
+    pos = low   # x가 들어갈 위치
+
+
+    if pos == len(lis) :
+        lis.append(x)     # x가 가장 크면 append
+    else:
+        lis[pos] = x  # 아니면 바꾸기
+
+print(len(lis))
