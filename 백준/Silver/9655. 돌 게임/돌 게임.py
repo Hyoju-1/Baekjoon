@@ -11,3 +11,25 @@ if n % 2 == 0:
     print("CY")
 else:
     print("SK")
+
+### DP로 풀기 
+n = int(input())
+
+dp = [False] * (n+1)
+dp[0] = False
+if n >= 1:
+    dp[1] = True
+if n >= 2:
+    dp[2] = False
+if n >= 3:
+    dp[3] = True
+
+for i in range(4, n+1):
+    # 1개 가져가거나 3개 가져가서 상대가 질 수밖에 없으면 이김
+    dp[i] = (not dp[i-1]) or (not dp[i-3])
+
+# 결과 출력
+if dp[n]:
+    print("SK")
+else:
+    print("CY")
